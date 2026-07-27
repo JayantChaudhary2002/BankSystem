@@ -3,6 +3,8 @@ package com.eazybytes.cards.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 import java.util.PrimitiveIterator;
@@ -32,4 +34,22 @@ public class CardsDto {
             description = "Type of the card", example = "Credit Card"
     )
     private String cardType;
+
+    @Positive(message = "Total card limit should be greater than zero")
+    @Schema(
+            description = "Total amount limit available against a card", example = "10000"
+    )
+    private int totalLimit;
+
+    @PositiveOrZero(message = "Total amount should be equal or greater than zero")
+    @Schema(
+            description = "Total amount used by the customer", example = "1000"
+    )
+    private int amountUsed;
+
+    @PositiveOrZero(message = "Total available amount should be equal or greater than zero")
+    @Schema(
+            description = "Total available amount against card", example = "9000"
+    )
+    private int availableAmount;
 }
